@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
@@ -46,7 +45,7 @@ export const loginAdmin = async (req: any, res: any) => {
     // Generate JWT
     const token = jwt.sign({ userId: admin._id, role: admin.role }, 'secret', { expiresIn: '1h' });
 
-    res.status(200).json({ token });
+    res.status(200).json({ token, adminId: admin._id });
   } catch (error:any) {
     res.status(500).json({ error: error.message });
   }
@@ -65,7 +64,7 @@ export const getAssignments = async (req: any, res: any) => {
 
 // Accept Assignment
 export const acceptAssignment = async (req: any, res: any) => {
-  const { id } = req.params; // Assignment ID
+  const { id } = req.params; 
   try {
     const assignment = await Assignment.findById(id);
     if (!assignment) {

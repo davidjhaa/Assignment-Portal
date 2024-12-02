@@ -11,7 +11,7 @@ export interface IAssignment extends Document {
 const AssignmentSchema: Schema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   adminId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  task: { type: String, required: true },
+  task: { type: Object, required: true },
   status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
   createdAt: { type: Date, default: Date.now }
 });
